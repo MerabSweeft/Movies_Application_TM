@@ -1,9 +1,9 @@
 package com.merabk.moviesapplicationtm.domain.model
 
-data class ContentDomainModel(
+data class MainContentDomainModel(
     val id: Int,
-    val originalName: String,
     val overview: String,
-    val posterPath: String,
+    val name: String,
     val voteAverage: Double,
+    val posterPath: String
 )

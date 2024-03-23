@@ -1,55 +1,66 @@
 package com.merabk.moviesapplicationtm.presentation.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.merabk.moviesapplicationtm.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.merabk.moviesapplicationtm.databinding.FragmentDetailsBinding
+import com.merabk.moviesapplicationtm.presentation.DataState
+import com.merabk.moviesapplicationtm.presentation.vm.DetailsPageViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
+    private val viewModel: DetailsPageViewModel by viewModels()
+    private var _binding: FragmentDetailsBinding? = null
+    private val binding get() = _binding!!
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        collectDataState()
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private fun collectDataState() {
+        lifecycleScope.launch {
+            viewModel.dataState.collectLatest { dataState ->
+                when (dataState) {
+                    is DataState.Loading -> {
+                    }
+
+                    is DataState.Success -> {
+                        val data = dataState.data
+//                        moviesAdapter.submitList(data)
+//                        binding.filmsRv.adapter = moviesAdapter
+                        Log.d("SHECHEMAAA", "onCreate: $data")
+
+                    }
+
+                    is DataState.Error -> {
+                        val errorMessage = dataState.message
+                        Log.d("SHECHEMAAA", "onCreate: $errorMessage")
+
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false)
+    ): View {
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
+
 }

@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/film_image"
@@ -15,6 +16,8 @@
         android:id="@+id/film_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/film_image"
         app:layout_constraintStart_toEndOf="@+id/film_image"
         app:layout_constraintTop_toTopOf="@+id/film_image" />
 
@@ -22,6 +25,7 @@
         android:id="@+id/film_overview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/film_name"
         app:layout_constraintStart_toEndOf="@+id/film_name"
         app:layout_constraintTop_toTopOf="@+id/film_name" />
 
@@ -29,6 +33,7 @@
         android:id="@+id/film_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/film_overview"
         app:layout_constraintStart_toEndOf="@+id/film_overview"
         app:layout_constraintTop_toTopOf="@+id/film_overview" />
 

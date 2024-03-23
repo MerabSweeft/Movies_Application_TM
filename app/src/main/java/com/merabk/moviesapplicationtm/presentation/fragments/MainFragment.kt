@@ -6,26 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.merabk.moviesapplicationtm.R
 import com.merabk.moviesapplicationtm.databinding.FragmentMainBinding
 import com.merabk.moviesapplicationtm.presentation.DataState
 import com.merabk.moviesapplicationtm.presentation.adapter.RvAdapter
 import com.merabk.moviesapplicationtm.presentation.vm.MainPageViewModel
+import com.merabk.moviesapplicationtm.util.collectFlow
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), RvAdapter.MovieItemClickListener {
 
-    private val viewModel: MainPageViewModel by activityViewModels()
-    private var moviesAdapter: RvAdapter = RvAdapter {
-        findNavController().navigate(R.id.action_mainFragment_to_detailsFragment)
-    }
+    private val viewModel: MainPageViewModel by viewModels()
+    private var moviesAdapter: RvAdapter = RvAdapter(this)
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
@@ -36,25 +30,23 @@ class MainFragment : Fragment() {
     }
 
     private fun collectDataState() {
-        lifecycleScope.launch {
-            viewModel.dataState.collectLatest { dataState ->
-                when (dataState) {
-                    is DataState.Loading -> {
-                    }
+        collectFlow(viewModel.dataState) { dataState ->
+            when (dataState) {
+                is DataState.Loading -> {
+                }
 
-                    is DataState.Success -> {
-                        val data = dataState.data
-                        moviesAdapter.submitList(data)
-                        binding.filmsRv.adapter = moviesAdapter
-                        Log.d("SHECHEMAAA", "onCreate: $data")
+                is DataState.Success -> {
+                    val data = dataState.data
+                    moviesAdapter.submitList(data)
+                    binding.filmsRv.adapter = moviesAdapter
+                    Log.d("SHECHEMAAA", "onCreate: $data")
 
-                    }
+                }
 
-                    is DataState.Error -> {
-                        val errorMessage = dataState.message
-                        Log.d("SHECHEMAAA", "onCreate: $errorMessage")
+                is DataState.Error -> {
+                    val errorMessage = dataState.message
+                    Log.d("SHECHEMAAA", "onCreate: $errorMessage")
 
-                    }
                 }
             }
         }
@@ -71,5 +63,10 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onMovieItemClicked(movieId: Int) {
+        val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(movieId)
+        findNavController().navigate(action)
     }
 }
