@@ -1,11 +1,13 @@
 package com.merabk.moviesapplicationtm.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
+@Serializable
 data class ProductionCountries(
 
-    @SerializedName("iso_3166_1") var iso31661: String? = null,
-    @SerializedName("name") var name: String? = null
+    @SerialName("iso_3166_1") val iso31661: String? = null,
+    @SerialName("name") val name: String? = null
 
 )

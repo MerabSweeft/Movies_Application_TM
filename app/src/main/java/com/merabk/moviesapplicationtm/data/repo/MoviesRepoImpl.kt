@@ -42,12 +42,12 @@ class MoviesRepoImpl @Inject constructor(
             }
         } catch (e: Exception) {
             Result.failure(e)
-        }    }
+        }
+    }
 
     override suspend fun getMovieDetails(id: Int): Result<DetailsContentDomainModel> {
         return try {
-            val response =
-                api.getMovieDetails(movieId = id)
+            val response = api.getMovieDetails(movieId = id)
             val body = response.body()
             if (response.isSuccessful && body != null) {
                 val contentApiModels = filmDetailsMapper.map(body)

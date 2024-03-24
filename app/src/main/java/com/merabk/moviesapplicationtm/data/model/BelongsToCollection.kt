@@ -1,12 +1,13 @@
 package com.merabk.moviesapplicationtm.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class BelongsToCollection(
 
-    @SerializedName("id") var id: Int? = null,
-    @SerializedName("name") var name: String? = null,
-    @SerializedName("poster_path") var posterPath: String? = null,
-    @SerializedName("backdrop_path") var backdropPath: String? = null
-
+    @SerialName("id") val id: Int? = null,
+    @SerialName("name") val name: String? = null,
+    @SerialName("poster_path") val posterPath: String? = null,
+    @SerialName("backdrop_path") val backdropPath: String? = null
 )

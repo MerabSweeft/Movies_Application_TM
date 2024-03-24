@@ -1,11 +1,12 @@
 package com.merabk.moviesapplicationtm.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class Genres(
 
-    @SerializedName("id") var id: Int? = null,
-    @SerializedName("name") var name: String? = null
+    @SerialName("id") val id: Int? = null,
+    @SerialName("name") val name: String? = null
 
 )

@@ -1,12 +1,14 @@
 package com.merabk.moviesapplicationtm.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
+@Serializable
 data class SpokenLanguages(
 
-    @SerializedName("english_name") var englishName: String? = null,
-    @SerializedName("iso_639_1") var iso6391: String? = null,
-    @SerializedName("name") var name: String? = null
+    @SerialName("english_name") val englishName: String? = null,
+    @SerialName("iso_639_1") val iso6391: String? = null,
+    @SerialName("name") val name: String? = null
 
 )

@@ -58,13 +58,12 @@ class MainFragment : Fragment(), RvAdapter.MovieItemClickListener {
                     val data = dataState.data
                     moviesAdapter.submitList(data)
                     binding.filmsRv.adapter = moviesAdapter
-                    Log.d("SHECHEMAAA", "onCreate: $data")
 
                 }
 
                 is DataState.Error -> {
                     val errorMessage = dataState.message
-                    Log.d("SHECHEMAAA", "onCreate: $errorMessage")
+                    Log.d("errorMessage", "onCreate: $errorMessage")
 
                 }
             }
@@ -81,14 +80,11 @@ class MainFragment : Fragment(), RvAdapter.MovieItemClickListener {
                     val data = dataState.data
                     moviesAdapter.submitList(data)
                     binding.filmsRv.adapter = moviesAdapter
-                    Log.d("SHECHEMAAA", "onCreate: $data")
-
                 }
 
                 is DataState.Error -> {
                     val errorMessage = dataState.message
-                    Log.d("SHECHEMAAA", "onCreate: $errorMessage")
-
+                    Log.d("errorMessage", "collectAllMoviesData: $errorMessage")
                 }
             }
         }

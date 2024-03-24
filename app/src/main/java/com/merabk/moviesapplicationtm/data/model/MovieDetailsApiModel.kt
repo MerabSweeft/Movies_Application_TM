@@ -1,31 +1,34 @@
 package com.merabk.moviesapplicationtm.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 data class MovieDetailsApiModel(
-    @SerializedName("adult") var adult: Boolean? = null,
-    @SerializedName("backdrop_path") var backdropPath: String? = null,
-    @SerializedName("belongs_to_collection") var belongsToCollection: BelongsToCollection? = BelongsToCollection(),
-    @SerializedName("budget") var budget: Int? = null,
-    @SerializedName("genres") var genres: ArrayList<Genres> = arrayListOf(),
-    @SerializedName("homepage") var homepage: String? = null,
-    @SerializedName("id") var id: Int? = null,
-    @SerializedName("imdb_id") var imdbId: String? = null,
-    @SerializedName("original_language") var originalLanguage: String? = null,
-    @SerializedName("original_title") var originalTitle: String? = null,
-    @SerializedName("overview") var overview: String? = null,
-    @SerializedName("popularity") var popularity: Double? = null,
-    @SerializedName("poster_path") var posterPath: String? = null,
-    @SerializedName("production_companies") var productionCompanies: ArrayList<ProductionCompanies> = arrayListOf(),
-    @SerializedName("production_countries") var productionCountries: ArrayList<ProductionCountries> = arrayListOf(),
-    @SerializedName("release_date") var releaseDate: String? = null,
-    @SerializedName("revenue") var revenue: Int? = null,
-    @SerializedName("runtime") var runtime: Int? = null,
-    @SerializedName("spoken_languages") var spokenLanguages: ArrayList<SpokenLanguages> = arrayListOf(),
-    @SerializedName("status") var status: String? = null,
-    @SerializedName("tagline") var tagline: String? = null,
-    @SerializedName("title") var title: String? = null,
-    @SerializedName("video") var video: Boolean? = null,
-    @SerializedName("vote_average") var voteAverage: Double? = null,
-    @SerializedName("vote_count") var voteCount: Int? = null
+    @SerialName("adult") val adult: Boolean?,
+    @SerialName("backdrop_path") val backdropPath: String?,
+    @SerialName("belongs_to_collection") val belongsToCollection: BelongsToCollection? = BelongsToCollection(),
+    @SerialName("budget") val budget: Int?,
+    @SerialName("genres") val genres: ArrayList<Genres> = arrayListOf(),
+    @SerialName("homepage") val homepage: String?,
+    @SerialName("id") val id: Int?,
+    @SerialName("imdb_id") val imdbId: String?,
+    @SerialName("original_language") val originalLanguage: String?,
+    @SerialName("original_title") val originalTitle: String?,
+    @SerialName("overview") val overview: String?,
+    @SerialName("popularity") val popularity: Double?,
+    @SerialName("poster_path") val posterPath: String?,
+    @SerialName("production_companies") val productionCompanies: ArrayList<ProductionCompanies> = arrayListOf(),
+    @SerialName("production_countries") val productionCountries: ArrayList<ProductionCountries> = arrayListOf(),
+    @SerialName("release_date") val releaseDate: String?,
+    @SerialName("revenue") val revenue: Int?,
+    @SerialName("runtime") val runtime: Int?,
+    @SerialName("spoken_languages") val spokenLanguages: ArrayList<SpokenLanguages> = arrayListOf(),
+    @SerialName("status") val status: String?,
+    @SerialName("tagline") val tagline: String?,
+    @SerialName("title") val title: String?,
+    @SerialName("video") val video: Boolean?,
+    @SerialName("vote_average") val voteAverage: Double?,
+    @SerialName("vote_count") val voteCount: Int?
 )

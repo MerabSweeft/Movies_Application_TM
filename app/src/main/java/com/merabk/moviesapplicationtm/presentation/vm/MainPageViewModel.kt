@@ -1,6 +1,5 @@
 package com.merabk.moviesapplicationtm.presentation.vm
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.merabk.moviesapplicationtm.domain.model.MainContentDomainModel
@@ -50,7 +49,6 @@ class MainPageViewModel @Inject constructor(
             }
             result.onFailure {
                 _allMoviesData.tryEmit(DataState.Error(it.message ?: "An error occurred"))
-                Log.d("SHECHEMAAA", "onCreate: ${it.stackTrace}")
             }
         }
     }
@@ -67,7 +65,6 @@ class MainPageViewModel @Inject constructor(
             }
             result.onFailure {
                 _searchMoviesData.emit(DataState.Error(it.message ?: "An error occurred"))
-                Log.d("SHECHEMAAA", "onCreate: ${it.stackTrace}")
             }
         }
     }

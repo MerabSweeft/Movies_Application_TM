@@ -5,6 +5,7 @@ import com.merabk.moviesapplicationtm.data.model.MovieDetailsApiModel
 import com.merabk.moviesapplicationtm.data.model.SearchMoviesApiModel
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MoviesApi {
@@ -20,8 +21,9 @@ interface MoviesApi {
         @Query("page") page: Int = 1,
     ): Response<SearchMoviesApiModel>
 
-    @GET("movie/")
+    @GET("movie/{movie_id}")
     suspend fun getMovieDetails(
-        @Query("id") movieId: Int,
+        @Path("movie_id") movieId: Int,
+        @Query("language") language: String = "en-US",
     ): Response<MovieDetailsApiModel>
 }

@@ -11,8 +11,8 @@ interface AllFilmsMapper {
 
     @Reusable
     class AllFilmsMapperImpl @Inject constructor() : AllFilmsMapper {
-        override fun map(allMoviesModel: List<ResultApi>): List<MainContentDomainModel> {
-            val contentApiModels = allMoviesModel.map {
+        override fun map(allMoviesModel: List<ResultApi>): List<MainContentDomainModel> =
+            allMoviesModel.map {
                 MainContentDomainModel(
                     id = it.id,
                     overview = it.overview,
@@ -21,7 +21,5 @@ interface AllFilmsMapper {
                     posterPath = (MoviesRepoImpl.IMAGE_BEGINNING + it.posterPath.orEmpty())
                 )
             }
-            return contentApiModels
-        }
     }
 }

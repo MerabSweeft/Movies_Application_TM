@@ -8,5 +8,6 @@ data class DetailsContentDomainModel(
     val posterPath: String,
     val productionCompanies: List<ProductionCompaniesDomainModel>,
     val genres: String,
+    val releaseDate: String,
     val voteAverage: Double,
 )

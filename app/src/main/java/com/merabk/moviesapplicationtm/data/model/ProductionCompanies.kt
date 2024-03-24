@@ -1,13 +1,15 @@
 package com.merabk.moviesapplicationtm.data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
+@Serializable
 data class ProductionCompanies(
 
-    @SerializedName("id") var id: Int? = null,
-    @SerializedName("logo_path") var logoPath: String? = null,
-    @SerializedName("name") var name: String? = null,
-    @SerializedName("origin_country") var originCountry: String? = null
+    @SerialName("id") val id: Int? = null,
+    @SerialName("logo_path") val logoPath: String? = null,
+    @SerialName("name") val name: String? = null,
+    @SerialName("origin_country") val originCountry: String? = null
 
 )

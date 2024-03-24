@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name_str">"NAME: %1$s "</string>
     <string name="rating_str">RATING: %1$s</string>
+    <string name="detail_generic">DETAIL</string>
+
 </resources>
