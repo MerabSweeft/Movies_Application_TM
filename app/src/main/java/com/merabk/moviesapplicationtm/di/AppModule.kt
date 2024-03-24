@@ -12,6 +12,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -19,7 +20,12 @@ import javax.inject.Singleton
 object AppModule {
 
     @Provides
+    @Named("baseUrl")
     fun provideBaseUrl(): String = "https://api.themoviedb.org/3/"
+
+    @Provides
+    @Named("apiKey")
+    fun provideApiKey(): String = "f01ae87f32faec4d78371bb9347513bf"
 
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
@@ -34,7 +40,7 @@ object AppModule {
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     fun provideRetrofitBuilder(
-        url: String,
+        @Named("baseUrl") url: String,
         json: Json,
         okHttpClient: OkHttpClient
     ): Retrofit.Builder = Retrofit.Builder()
@@ -43,11 +49,13 @@ object AppModule {
         .client(okHttpClient)
 
     @Provides
-    fun provideInterceptor(): Interceptor =
+    fun provideInterceptor(
+        @Named("apiKey") apiKey: String
+    ): Interceptor =
         Interceptor { chain ->
             val original = chain.request()
             val httpUrl = original.url.newBuilder()
-                .addQueryParameter("api_key", "f01ae87f32faec4d78371bb9347513bf")
+                .addQueryParameter("api_key", apiKey)
                 .build()
             val requestBuilder: Request.Builder = original.newBuilder()
                 .url(httpUrl)

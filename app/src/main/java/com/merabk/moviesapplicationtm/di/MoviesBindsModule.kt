@@ -2,6 +2,7 @@ package com.merabk.moviesapplicationtm.di
 
 import com.merabk.moviesapplicationtm.data.mapper.AllFilmsMapper
 import com.merabk.moviesapplicationtm.data.mapper.FilmDetailsMapper
+import com.merabk.moviesapplicationtm.data.mapper.SearchFilmsMapper
 import com.merabk.moviesapplicationtm.data.repo.MoviesRepoImpl
 import com.merabk.moviesapplicationtm.domain.repo.MoviesRepo
 import com.merabk.moviesapplicationtm.util.Dispatchers
@@ -25,6 +26,10 @@ abstract class MoviesBindsModule {
     abstract fun bindAllFilmsMapper(
         allFilmsMapper: AllFilmsMapper.AllFilmsMapperImpl
     ): AllFilmsMapper
+    @Binds
+    abstract fun bindSearchFilmsMapper(
+        searchFilmsMapper: SearchFilmsMapper.SearchFilmsMapperImp
+    ): SearchFilmsMapper
 
     @Binds
     abstract fun bindFilmDetailsMapper(

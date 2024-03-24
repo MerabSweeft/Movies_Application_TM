@@ -3,8 +3,8 @@ package com.merabk.moviesapplicationtm.util
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -20,8 +20,7 @@ fun ImageView.loadImageWithGlide(imageUrl: String) {
 
 fun <T> Fragment.collectFlow(flow: Flow<T>, onCollect: suspend (T) -> Unit) =
     viewLifecycleOwner.lifecycleScope.launch {
-        flow.flowWithLifecycle(
-            viewLifecycleOwner.lifecycle,
-            Lifecycle.State.STARTED
-        ).collectLatest(onCollect)
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collectLatest(onCollect)
+        }
     }

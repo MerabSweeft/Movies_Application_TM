@@ -4,10 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResultApi(
+data class SearchResultApi(
     val id: Int,
     val overview: String,
-    @SerialName("name")
+    @SerialName("original_title")
     val name: String,
     @SerialName("vote_average")
     val voteAverage: Double,
